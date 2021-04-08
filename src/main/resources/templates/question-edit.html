@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+</head>
+<body>
+
+<div class="container mt-5 md-5">
+
+        <form  th:action="'/test/view/'+${id}+'/question/'+${questionId}+'/edit'"
+               method="post" th:object="${myquestion}">
+
+        <input type="text" th:field="*{question}" placeholder="Введите вопрос" class="form-control"><br>
+        <div th:each="var:*{variants}">
+            <input type="text"  th:placeholder="${var}" class="form-control"><br>
+        </div>
+        <input type="text" th:field="*{answer}"placeholder="Введите ответ" class="form-control"><br>
+        <button type="submit" class="btn btn-success">Edit</button>
+
+        </form>
+
+</div>
+
+</body>
+</html>

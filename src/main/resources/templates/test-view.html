@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <title>Test view</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+</head>
+<body>
+
+       <div class="container mt-5">
+           <div class="alert alert-info mt-2" >
+               <div th:each="q:${questions}" th:object="${test}">
+                   <a th:href="'/test/view/'+*{id}+'/question/'+${q.getId()}" th:text="${q.getQuestion()}"/>
+
+               </div>
+           </div>
+
+        </div>
+
+
+
+</body>
+</html>
