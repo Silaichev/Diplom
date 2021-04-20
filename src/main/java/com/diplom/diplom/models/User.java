@@ -32,6 +32,14 @@ public class User implements UserDetails {
         this.password = new BCryptPasswordEncoder().encode(password);
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public UserAuthorities getUserAuthorities() {
         return userAuthorities;
     }

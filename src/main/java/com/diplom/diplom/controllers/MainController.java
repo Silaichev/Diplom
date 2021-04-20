@@ -33,6 +33,7 @@ public class MainController {
     @Autowired
     TestRepo tr;
 
+
     @GetMapping("/start")
     public void backup() {
         List<User> users = (List<User>) userRepo.findAll();
@@ -155,5 +156,35 @@ public class MainController {
 
 
         return "redirect:/test/view/" + id+"";
+    }
+
+    @GetMapping("list")
+    public String list(Model model){
+        ArrayList<User> users = (ArrayList<User>) userRepo.findAll();
+        model.addAttribute("list",users);
+        return "list";
+    }
+
+    @PostMapping("list")
+    public String listPost(@ModelAttribute ArrayList<User> list){
+        list.stream().forEach(System.out::println);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/user")
+    public String userGet(Model model){
+        model.addAttribute("user",new User());
+        return "GR";
+    }
+    @PostMapping("/user")
+    public String greetingSubmit(@ModelAttribute User user, Model model) {
+        System.out.println(user.toString());
+        return "result";
+    }
+    //Rabotaet
+    @GetMapping("delete/user/{id}")
+    public String delete(Model model,@PathVariable long id){
+        userRepo.deleteById(id);
+        return "redirect:/list";
     }
 }

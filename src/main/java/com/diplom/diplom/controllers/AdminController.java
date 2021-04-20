@@ -23,10 +23,9 @@ public class AdminController {
 
     @GetMapping("/deleteUserByUsername/{username}")
     public void deleteUserById(@PathVariable String username){
-
         UserAuthorities ua = userAuthoritiesRepo.findUserAuthoritiesByAuthority("ROLE_USER");
         ua.deleteUserByUser(userRepo.findByUsername(username));
         userRepo.deleteByUsername(username);
-
     }
+
 }
