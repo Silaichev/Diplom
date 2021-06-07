@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователи</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+<header th:insert="fragments/admin_header.html :: header"> </header>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Логин </th>
+            <th scope="col"> Пароль </th>
+            <th scope="col"> Результаты </th>
+            <th scope="col"> Удалить </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${list}">
+            <td th:text="${user.getUsername()}">Name</td>
+            <td th:text="${user.getPassword()}"> Pass </td>
+            <td><form th:action="'/admin/results/view/user/'+${user.getId()}" method="get">
+                    <button class="btn btn-info" type="submit" >Результаты тестов</button>
+                </form></td>
+
+            <td><form th:action="'/admin/delete/user/'+${user.getId()}" method="get">
+                    <button class="btn btn-danger" type="submit" >Удалить пользователя</button>
+                </form></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
