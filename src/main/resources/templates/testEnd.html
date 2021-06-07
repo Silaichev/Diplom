@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Конец теста</title>
+    </head>
+    <body>
+        <p>Вы закончили прохождение теста!</p>
+        <p>Ваш результат:</p><p th:text="${score}+' из '+${all}"/>
+        <a href="/user/tests">Перейти на страницу тестов</a>
+    </body>
+</html>

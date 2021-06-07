@@ -1,4 +1,4 @@
-package com.diplom.diplom.models;
+package com.diplom.models;
 
 
 import javax.persistence.*;
@@ -14,8 +14,11 @@ public class Test {
     public long id;
     public String name;
 
+
     @OneToMany(mappedBy = "test")
     private List<Question> questions = new ArrayList<>();
+
+
 
     public Test() {
     }
@@ -27,6 +30,13 @@ public class Test {
     public Test(String name, List<Question> questions) {
         this.name = name;
         this.questions = questions;
+    }
+
+
+
+
+    public void preDelete(){
+        questions = null;
     }
 
     public long getId() {

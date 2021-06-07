@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div>
+    <p>Вопрос</p>
+    <p th:text="${question.question}"></p>
+    <form  method="post">
+        <!--<select  name="variant">
+            <option th:each="var:${question.variants}" name="var" th:value="${var}" th:text="${var}">
+                <input type="hidden" name="var" th:value="${var}"/>
+                variant</option>
+        </select>-->
+        <input type="radio" name="var" th:value="${var}" th:each="var:${question.variants}" th:text="${var}">
+        <button type="submit"  class="btn btn-success" >Отправить</button>
+    </form>
+
+
+
+
+</div>
+
+
+</body>
+</html>

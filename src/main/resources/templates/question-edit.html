@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+    <title>Изменить вопрос</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
 </head>
 <body>
-
+<header th:insert="fragments/admin_header.html :: header"> </header>
 <div class="container mt-5 md-5">
 
-        <form  th:action="'/test/view/'+${id}+'/question/'+${questionId}+'/edit'"
-               method="post" th:object="${myquestion}">
+    <form method="post">
 
-        <input type="text" th:field="*{question}" placeholder="Введите вопрос" class="form-control"><br>
-        <div th:each="var:*{variants}">
-            <input type="text"  th:placeholder="${var}" class="form-control"><br>
-        </div>
-        <input type="text" th:field="*{answer}"placeholder="Введите ответ" class="form-control"><br>
-        <button type="submit" class="btn btn-success">Edit</button>
+            <input type="text" name="question" th:value="${question}" class="form-control"><br>
+            <input type="text" name="var1" th:value="${var1}" class="form-control"><br>
+            <input type="text" name="var2" th:value="${var2}" class="form-control"><br>
+            <input type="text" name="var3" th:value="${var3}" class="form-control"><br>
+            <input type="text" name="var4" th:value="${var4}" class="form-control"><br>
 
-        </form>
+            <input type="text" name="answer" th:value="${answer}" class="form-control"><br>
+            <button th:action="'/test/view/'+${id}+'/question/'+${idQ}+'/edit'" type="submit"
+                    class="btn btn-success">Сохранить
+            </button>
+
+    </form>
 
 </div>
 

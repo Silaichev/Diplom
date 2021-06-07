@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Результаты тестов пользователя</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<header th:insert="fragments/admin_header.html :: header"></header>
+
+<div class="container mt-5">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Название теста</th>
+            <th scope="col">Количество вопросов</th>
+            <th scope="col">Результаты</th>
+            <th scope="col">Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r:${results}">
+            <td th:text="${r.test}"></td>
+            <td th:text="${r.numOfQuestions}"></td>
+            <td th:text="${r.score}"></td>
+            <td th:text="${r.date}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

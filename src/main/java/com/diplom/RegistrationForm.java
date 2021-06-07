@@ -1,8 +1,7 @@
-package com.diplom.diplom;
+package com.diplom;
 
-import com.diplom.diplom.models.User;
+import com.diplom.models.User;
 import lombok.Data;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Data
 public class RegistrationForm {

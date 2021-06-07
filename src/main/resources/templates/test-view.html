@@ -1,24 +1,35 @@
 <!DOCTYPE HTML>
-<html xmlns:th = "http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Test view</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-
 </head>
 <body>
-
-       <div class="container mt-5">
-           <div class="alert alert-info mt-2" >
-               <div th:each="q:${questions}" th:object="${test}">
-                   <a th:href="'/test/view/'+*{id}+'/question/'+${q.getId()}" th:text="${q.getQuestion()}"/>
-
-               </div>
-           </div>
-
-        </div>
-
-
-
+<header th:insert="fragments/admin_header.html :: header"> </header>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Название вопроса</th>
+        <th scope="col">Изменить вопрос</th>
+        <th scope="col">Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="q:${test.getQuestions()}">
+        <td th:text="${q.getQuestion()}"></td>
+        <td>
+            <form th:action="'/admin/test/view/'+${test.id}+'/question/'+${q.getId()}+'/edit'" method="get">
+                <button class="btn btn-warning" type="submit">Изменить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/admin/question/'+${q.getId()}+'/delete'" method="get">
+                <button class="btn btn-danger" type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

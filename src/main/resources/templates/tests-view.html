@@ -1,23 +1,54 @@
 <!DOCTYPE HTML>
-<html xmlns:th = "http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>All Tests view</title>
+    <title>Главная</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
 </head>
 <body>
+<header th:insert="fragments/admin_header.html :: header"> </header>
 
 <div class="container mt-5">
-        <p1>Тесты:</p1>
-        <div th:each="t:${tests}">
-            <a th:href="'/test/view/'+${t.getId()}" th:text="${t.getName()}"/>
-        </div>
 
-
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Название теста</th>
+            <th scope="col">Количество вопросов</th>
+            <th scope="col">Подробнее</th>
+            <th scope="col">Результаты</th>
+            <th scope="col">Добавить вопрос</th>
+            <th scope="col">Удалить тест</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="t:${tests}">
+            <td th:text="${t.getName()}"></td>
+            <td th:text="${t.getQuestions().size()}"></td>
+            <td>
+                <form th:action="'/admin/test/view/'+${t.getId()}" method="get">
+                    <button class="btn btn-info" type="submit" >Подробнее</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/admin/results/view/'+${t.getId()}" method="get">
+                    <button class="btn btn-warning" type="submit" >Результаты</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/admin/test/view/'+${t.getId()}+'/question/add'" method="get">
+                    <button class="btn btn-success" type="submit" >Добавить вопрос</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/admin/test/delete/'+${t.getId()}" method="get">
+                    <button class="btn btn-danger" type="submit" >Удалить тест</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
-
-
 </body>
 </html>

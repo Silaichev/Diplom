@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Название теста</th>
+            <th>Количество вопросов</th>
+            <th>
+                Ссылка
+            </th>
+        </thead>
+        <tbody>
+        <tr th:each="test:${tests}">
+
+            <td><span th:text="${test.getName()}"> Name </span></td>
+            <td th:text="${test.questions.size()}">Size</td>
+
+
+            <td >
+                <form method="post" th:action="'tests/'+${test.getId()}">
+                    <button type="submit">Начать тест</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

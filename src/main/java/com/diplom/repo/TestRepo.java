@@ -1,6 +1,6 @@
-package com.diplom.diplom.repo;
+package com.diplom.repo;
 
-import com.diplom.diplom.models.Test;
+import com.diplom.models.Test;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

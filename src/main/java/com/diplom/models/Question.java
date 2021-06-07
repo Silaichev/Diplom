@@ -1,7 +1,8 @@
-package com.diplom.diplom.models;
+package com.diplom.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -15,16 +16,21 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     public List<String> variants = new ArrayList<>();
     public String answer;
     public String question;
+
 
     public Question(Test test,String question,List<String> variants, String answer) {
         this.variants = variants;
         this.question=question;
         this.answer = answer;
         this.test = test;
+    }
+
+    public void deleteAllVariants(){
+        variants=new LinkedList<String>();
     }
 
     public void setQuestion(String question) {

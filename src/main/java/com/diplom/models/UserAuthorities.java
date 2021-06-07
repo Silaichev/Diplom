@@ -1,13 +1,10 @@
-package com.diplom.diplom.models;
-
-import com.diplom.diplom.repo.UserRepo;
+package com.diplom.models;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class UserAuthorities {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

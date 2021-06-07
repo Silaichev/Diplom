@@ -1,22 +1,14 @@
-package com.diplom.diplom;
+package com.diplom;
 
-import com.diplom.diplom.models.User;
-import com.diplom.diplom.models.UserAuthorities;
-import com.diplom.diplom.repo.UserRepo;
+import com.diplom.repo.TestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.File;
-import java.util.List;
-
 @SpringBootApplication
 public class DiplomApplication {
     @Autowired
-    static UserRepo userRepo;
+    static TestRepo testRepo;
 
 
     public static void main(String[] args) {

@@ -1,0 +1,30 @@
+<div th:fragment="header">
+    <script type="text/javascript">
+        function time(){
+            var d = new Date();
+            var h = d.getHours();
+            var m = check(d.getMinutes());
+            var s = check(d.getSeconds());
+            document.getElementById("time").innerHTML = h+":"+m+":"+s;
+            t=setInterval('time()',500)
+        }
+        function check(i){
+            if (i<10)
+            {
+                i="0" + i;
+            }
+            return i;
+        }
+    </script>
+    <div class="d-flex flex-column  flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+        <h4 id="time" class="my-0 mr-md-auto font-weight-normal">Приложение для тестирования</h4>
+        <script type="text/javascript"> time('time')</script>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/admin/test/view">Главная</a>
+            <a class="p-2 text-dark" href="/admin/test/add">Добавить тест</a>
+            <a class="p-2 text-dark" href="/admin/user/view">Список пользователей</a>
+        </nav>
+        <a class="btn btn-outline-primary" href="/logout">Выйти</a>
+    </div>
+</div>

@@ -1,10 +1,7 @@
-package com.diplom.diplom.repo;
+package com.diplom.repo;
 
-import com.diplom.diplom.models.Question;
-import com.diplom.diplom.models.Test;
+import com.diplom.models.Question;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface QuestionRepo extends CrudRepository<Question,Long> {
 

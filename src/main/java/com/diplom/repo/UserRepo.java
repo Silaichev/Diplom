@@ -1,7 +1,6 @@
-package com.diplom.diplom.repo;
+package com.diplom.repo;
 
-import com.diplom.diplom.models.User;
-import org.springframework.context.annotation.Bean;
+import com.diplom.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;

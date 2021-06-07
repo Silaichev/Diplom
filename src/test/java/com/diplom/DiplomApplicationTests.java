@@ -1,4 +1,4 @@
-package com.diplom.diplom;
+package com.diplom;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

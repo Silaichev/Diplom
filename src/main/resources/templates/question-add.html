@@ -1,31 +1,30 @@
 <!DOCTYPE HTML>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <title>Blog-Add</title>
+    <title>Добавить вопрос</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
 
 </head>
 <body>
-
+<header th:insert="fragments/admin_header.html :: header"> </header>
 
 <div class="container mt-5 mb-5">
     <h1>Добавление Вопроса</h1>
-    <div th:object="${test}">
-        <form  th:method="post"  >
-            <div id="input0"></div>
-            <input type="text" name="question" placeholder="Введите вопрос" class="form-control"><br>
-            <input type="text" name="var1"  placeholder="Введите вариант ответа" class="form-control"><br>
-            <input type="text" name="var2"  placeholder="Введите вариант ответа" class="form-control"><br>
-            <input type="text" name="var3"  placeholder="Введите вариант ответа" class="form-control"><br>
-            <input type="text" name="var4"  placeholder="Введите вариант ответа" class="form-control"><br>
-            <input type="text" name="answer" placeholder="Введите правильный ответ" class="form-control"><br>
-            <button type="submit" class="btn btn-success">Добавить</button>
+
+        <form th:method="post" >
+            <div th:object="${question}">
+                <label>Введите вопрос</label>
+                <input type="text" name="myQuestion" placeholder="Введите вопрос" class="form-control"><br>
+                <input name="var1" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
+                <input name="var2" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
+                <input name="var3" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
+                <input name="var4" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
+                <input type="text" th:field="${question.answer}" placeholder="Введите правильный ответ" class="form-control"><br>
+                <button type="submit" th:href="${'/test/view/'+id+'/question/add'}" class="btn btn-success">Добавить</button>
+            </div>
         </form>
-    </div>
-
-
 </div>
 </body>
 

@@ -1,4 +1,4 @@
-package com.diplom.diplom.security;
+package com.diplom.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,10 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        /*auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("q2w1e4r3")
-                .authorities("ADMIN");*/
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
@@ -39,22 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "where username=?")
         .passwordEncoder(new BCryptPasswordEncoder());
 
-
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/register","/login")
-                .permitAll()
-                .antMatchers("/**")
-                .hasRole("ADMIN")
-                .and().formLogin();
 
+        http.authorizeRequests()
+                .antMatchers("/register", "/login").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
+                .and().formLogin().defaultSuccessUrl("/main");
 
         http.csrf().disable();
-
     }
     //Это для RegistrationController
     @Bean
