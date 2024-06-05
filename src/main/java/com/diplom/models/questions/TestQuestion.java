@@ -1,13 +1,16 @@
-package com.diplom.models;
+package com.diplom.models.questions;
+
+import com.diplom.models.Test;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "questions")
-public class Question {
+@Table(name = "test_questions")
+public class TestQuestion {
 
     @ManyToOne
     private Test test;
@@ -21,27 +24,7 @@ public class Question {
     public String answer;
     public String question;
 
-
-    public Question(Test test,String question,List<String> variants, String answer) {
-        this.variants = variants;
-        this.question=question;
-        this.answer = answer;
-        this.test = test;
-    }
-
-    public void deleteAllVariants(){
-        variants=new LinkedList<String>();
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public Question() {
+    public TestQuestion() {
     }
 
     public Test getTest() {
@@ -56,8 +39,8 @@ public class Question {
         return id;
     }
 
-    public void addVariant(String var){
-        variants.add(var);
+    public void setId(long id) {
+        this.id = id;
     }
 
     public List<String> getVariants() {
@@ -68,6 +51,10 @@ public class Question {
         this.variants = variants;
     }
 
+    public void addVariant(String variant){
+        Object o = Objects.isNull(this.variants) || this.variants.isEmpty() ? this.variants = Arrays.asList(variant) : this.variants.add(variant);
+    }
+
     public String getAnswer() {
         return answer;
     }
@@ -76,5 +63,11 @@ public class Question {
         this.answer = answer;
     }
 
+    public String getQuestion() {
+        return question;
+    }
 
+    public void setQuestion(String question) {
+        this.question = question;
+    }
 }

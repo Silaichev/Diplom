@@ -25,7 +25,7 @@
         <tbody>
         <tr th:each="t:${tests}">
             <td th:text="${t.getName()}"></td>
-            <td th:text="${t.getQuestions().size()}"></td>
+            <td th:text="${t.getOpenQuestions().size()+t.getTestQuestions().size()}"></td>
             <td>
                 <form th:action="'/admin/test/view/'+${t.getId()}" method="get">
                     <button class="btn btn-info" type="submit" >Подробнее</button>

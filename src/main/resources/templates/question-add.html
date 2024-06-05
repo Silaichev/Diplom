@@ -1,30 +1,173 @@
 <!DOCTYPE HTML>
-<html xmlns:th = "http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Добавить вопрос</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
+    <script type="text/javascript">
+        function changeTypeQuestion() {
+            questionType = document.getElementById("questionType");
+            questionTypeButton = document.getElementById("buttonTypeChange");
+
+
+            if (questionType.getAttribute("value") === ("test")) {
+                questionType.setAttribute("value", "open");
+                questionTypeButton.innerText = "Тестовый вопрос";
+                document.getElementById("variantsDiv").hidden = true;
+                document.getElementById("answerDiv").hidden = true;
+                document.getElementById("buttonAddVariantInput").hidden=true;
+
+            } else if (questionType.getAttribute("value") === ("open")) {
+                questionType.setAttribute("value", "test");
+                questionTypeButton.innerText = "Открытый вопрос";
+                document.getElementById("variantsDiv").hidden = false;
+                document.getElementById("answerDiv").hidden = false;
+                document.getElementById("buttonAddVariantInput").hidden=false;
+            }
+        }
+
+        function deleteField(e) {
+            e.parentElement.parentElement.parentElement.remove();
+        }
+
+        function addVariantInputs() {
+            document.getElementById("variantsDiv").innerHTML = document.getElementById("variantsDiv").innerHTML + "<div>\n" +
+                "                    <div class=\"input-group\">\n" +
+                "                        <input name=\"textVariants\" type=\"text\" class=\"form-control\" placeholder=\"Введите вариант ответа\"\n" +
+                "                               aria-label=\"Recipient's username\" aria-describedby=\"basic-addon2\">\n" +
+                "                        <div class=\"input-group-append\">\n" +
+                "                            <button class=\"btn btn-outline-secondary\" type=\"button\" onclick=\"changeInputTypeForVariant(this)\">\n" +
+                "                                Использовать картинку\n" +
+                "                            </button>\n" +
+                "                            <button class=\"btn btn-outline-secondary\" type=\"button\" onclick=\"deleteField(this)\">\n" +
+                "                                Удалить\n" +
+                "                            </button>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                    <br>\n" +
+                "                </div>"
+        }
+
+        function changeInputTypeForVariant(element) {
+            input = element.parentElement.parentElement.getElementsByClassName("form-control")[0];
+            if (input.getAttribute("type") === "text") {
+                input.setAttribute("type", "file");
+                input.setAttribute("name", "multipartVariants");
+                element.innerText = "Использовать текст";
+            } else if (input.getAttribute("type") === "file") {
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "textVariants");
+                element.innerText = "Использовать картинку";
+            }
+        }
+
+        function changeInputTypeForQuestion(element) {
+            input = element.parentElement.parentElement.getElementsByClassName("form-control")[0];
+            if (input.getAttribute("type") === "text") {
+                input.setAttribute("type", "file");
+                input.setAttribute("name", "multipartQuestion");
+                element.innerText = "Использовать текст";
+            } else if (input.getAttribute("type") === "file") {
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "textQuestion");
+                element.innerText = "Использовать картинку";
+            }
+        }
+
+        function changeInputTypeForAnswer(element) {
+            input = element.parentElement.parentElement.getElementsByClassName("form-control")[0];
+            if (input.getAttribute("type") === "text") {
+                input.setAttribute("type", "file");
+                input.setAttribute("name", "multipartAnswer");
+                element.innerText = "Использовать текст";
+            } else if (input.getAttribute("type") === "file") {
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "textAnswer");
+                element.innerText = "Использовать картинку";
+            }
+        }
+    </script>
 
 </head>
 <body>
-<header th:insert="fragments/admin_header.html :: header"> </header>
+<header th:insert="fragments/admin_header.html :: header"></header>
 
 <div class="container mt-5 mb-5">
-    <h1>Добавление Вопроса</h1>
+    <h1>Создание Вопроса</h1><br>
+    <button id="buttonTypeChange" onclick="changeTypeQuestion()" class="btn btn-success">Открытый вопрос</button>
+    <button id="buttonAddVariantInput" onclick="addVariantInputs()" class="btn btn-success">Добавить вариант ответа
+    </button>
+    <form th:method="post" enctype="multipart/form-data">
+        <div>
 
-        <form th:method="post" >
-            <div th:object="${question}">
-                <label>Введите вопрос</label>
-                <input type="text" name="myQuestion" placeholder="Введите вопрос" class="form-control"><br>
-                <input name="var1" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
-                <input name="var2" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
-                <input name="var3" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
-                <input name="var4" type="text" placeholder="Введите вариант ответа" class="form-control"><br>
-                <input type="text" th:field="${question.answer}" placeholder="Введите правильный ответ" class="form-control"><br>
-                <button type="submit" th:href="${'/test/view/'+id+'/question/add'}" class="btn btn-success">Добавить</button>
+            <label>Введите вопрос</label>
+            <input name="type" id="questionType" value="test" type="hidden">
+            <div>
+                <div class="input-group">
+                    <input name="textQuestion" type="text" class="form-control" placeholder="Введите вопрос"
+                           aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" onclick="changeInputTypeForQuestion(this)" type="button">
+                            Использовать картинку
+                        </button>
+                    </div>
+                    <br>
+                </div>
+                <br>
             </div>
-        </form>
+
+            <div id="variantsDiv">
+                <div>
+                    <div class="input-group">
+                        <input name="textVariants" type="text" class="form-control" placeholder="Введите вариант ответа"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="changeInputTypeForVariant(this)">
+                                Использовать картинку
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button" onclick="deleteField(this)">
+                                Удалить
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+                <div>
+                    <div class="input-group">
+                        <input name="textVariants" type="text" class="form-control" placeholder="Введите вариант ответа"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="changeInputTypeForVariant(this)">
+                                Использовать картинку
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button" onclick="deleteField(this)">
+                                Удалить
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+
+            <div id="answerDiv">
+                <div class="input-group">
+                    <input name="textAnswer" type="text" id="answer" placeholder="Введите правильный ответ" class="form-control"
+                           aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="changeInputTypeForAnswer(this)">
+                            Использовать картинку
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+            <button type="submit" th:href="${'/test/view/'+id+'/question/add'}" class="btn btn-success">Создать</button>
+        </div>
+    </form>
 </div>
 </body>
 

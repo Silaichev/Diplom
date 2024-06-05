@@ -16,7 +16,20 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="q:${test.getQuestions()}">
+    <tr th:each="q:${test.getOpenQuestions()}">
+        <td th:text="${q.getQuestion()}"></td>
+        <td>
+            <form th:action="'/admin/test/view/'+${test.id}+'/question/'+${q.getId()}+'/edit'" method="get">
+                <button class="btn btn-warning" type="submit">Изменить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/admin/question/'+${q.getId()}+'/delete'" method="get">
+                <button class="btn btn-danger" type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="q:${test.getTestQuestions()}">
         <td th:text="${q.getQuestion()}"></td>
         <td>
             <form th:action="'/admin/test/view/'+${test.id}+'/question/'+${q.getId()}+'/edit'" method="get">

@@ -2,36 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Главная</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <style>
+        .weigh{
+            width: 70%;
+            margin: 7%  15%;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <table>
+<header th:insert="fragments/user_header.html :: header"> </header>
+<div class="weigh">
+    <table class="table">
         <thead>
         <tr>
-            <th>Название теста</th>
-            <th>Количество вопросов</th>
-            <th>
-                Ссылка
-            </th>
+            <th scope="col">Название теста</th>
+            <th scope="col">Количество вопросов</th>
+            <th scope="col">Ссылка</th>
         </thead>
         <tbody>
         <tr th:each="test:${tests}">
-
             <td><span th:text="${test.getName()}"> Name </span></td>
-            <td th:text="${test.questions.size()}">Size</td>
-
-
+            <td th:text="${test.testQuestions.size()}">Size</td>
             <td >
                 <form method="post" th:action="'tests/'+${test.getId()}">
-                    <button type="submit">Начать тест</button>
+                    <button class="btn btn-success" type="submit">Начать тест</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
-
 </body>
 </html>

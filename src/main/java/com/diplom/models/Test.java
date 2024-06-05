@@ -1,9 +1,14 @@
 package com.diplom.models;
 
 
+import com.diplom.models.questions.OpenQuestion;
+import com.diplom.models.questions.TestQuestion;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tests")
@@ -16,9 +21,10 @@ public class Test {
 
 
     @OneToMany(mappedBy = "test")
-    private List<Question> questions = new ArrayList<>();
+    private List<TestQuestion> testQuestions = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "test")
+    private List<OpenQuestion> openQuestions = new ArrayList<>();
 
     public Test() {
     }
@@ -27,17 +33,6 @@ public class Test {
         this.name=name;
     }
 
-    public Test(String name, List<Question> questions) {
-        this.name = name;
-        this.questions = questions;
-    }
-
-
-
-
-    public void preDelete(){
-        questions = null;
-    }
 
     public long getId() {
         return id;
@@ -55,24 +50,27 @@ public class Test {
         this.name = name;
     }
 
-    public void addQuestion(Question q){
-        questions.add(q);
+    public List<TestQuestion> getTestQuestions() {
+        return testQuestions;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public void setTestQuestions(List<TestQuestion> testQuestions) {
+        this.testQuestions = testQuestions;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void addTestQuestion(TestQuestion testQuestion){
+        Object o = Objects.isNull(testQuestions) ? this.testQuestions = Arrays.asList(testQuestion) : this.testQuestions.add(testQuestion);
     }
 
-    @Override
-    public String toString() {
-        return "Test{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", questions=" + questions +
-                '}';
+    public List<OpenQuestion> getOpenQuestions() {
+        return openQuestions;
+    }
+
+    public void setOpenQuestions(List<OpenQuestion> openQuestions) {
+        this.openQuestions = openQuestions;
+    }
+
+    public void addOpenQuestion(OpenQuestion openQuestion){
+        Object o = Objects.isNull(this.openQuestions) ? this.openQuestions = Arrays.asList(openQuestion) : this.openQuestions.add(openQuestion);
     }
 }

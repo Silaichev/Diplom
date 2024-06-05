@@ -1,31 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <title>Test</title>
+    <title>Тестирование</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <style>
+        .center {
+            text-align: center;
+            margin: 8% 17% auto 17%;
+        }
+
+        .question {
+            text-align: left;
+        }
+
+    </style>
 </head>
 <body>
 
-<div>
-    <p>Вопрос</p>
-    <p th:text="${question.question}"></p>
-    <form  method="post">
-        <!--<select  name="variant">
-            <option th:each="var:${question.variants}" name="var" th:value="${var}" th:text="${var}">
-                <input type="hidden" name="var" th:value="${var}"/>
-                variant</option>
-        </select>-->
-        <input type="radio" name="var" th:value="${var}" th:each="var:${question.variants}" th:text="${var}">
-        <button type="submit"  class="btn btn-success" >Отправить</button>
+<div class="center">
+    <h2 th:unless="${question.startsWith('/image/')}" th:text="'Вопрос: '+${question}"></h2>
+    <img th:if="${question.startsWith('/image/')}" th:src="@{'/user'+${question}}">
+    <br/><br/>
+    <form method="post">
+           <span class="question" th:each="var:${variants}">
+           <h5>
+                <input th:if="${var.startsWith('/image/')}" type="radio" name="var" th:value="${var}" th:id="${var}">
+                <label th:if="${var.startsWith('/image/')}" th:for="${var}"><img th:src="@{'/user'+ ${var}}"></label>
+
+                <input th:unless="${var.startsWith('/image/')}" checked="checked" type="radio" name="var" th:value="${var}" th:text="'   '+ ${var}"><br/>
+           </h5>
+        </span>
+        <button type="submit" class="btn btn-warning">Отправить</button>
     </form>
-
-
-
-
 </div>
-
 
 </body>
 </html>

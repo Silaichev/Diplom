@@ -3,10 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <title>Конец теста</title>
+        <style>
+            .center{
+                text-align: center;
+                margin: 7% auto auto auto;
+            }
+        </style>
     </head>
     <body>
+    <div class="center">
         <p>Вы закончили прохождение теста!</p>
         <p>Ваш результат:</p><p th:text="${score}+' из '+${all}"/>
         <a href="/user/tests">Перейти на страницу тестов</a>
+    </div>
+
     </body>
 </html>

@@ -1,7 +1,10 @@
 package com.diplom.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class UserAuthorities {
@@ -20,9 +23,13 @@ public class UserAuthorities {
     }
 
     public UserAuthorities(User user, String authority) {
-        this.users.add(user);
+        Object o = Objects.isNull(users) || users.isEmpty() ? users = new ArrayList<>(Arrays.asList(user)) : this.users.add(user);
         this.authority = authority;
 
+    }
+    public UserAuthorities(List<User> incomeUsers, String authority) {
+        Object o = Objects.isNull(users) || users.isEmpty() ? users = incomeUsers : this.users.addAll(incomeUsers);
+        this.authority = authority;
     }
 
     public void deleteUserByUser(User user){
@@ -42,7 +49,7 @@ public class UserAuthorities {
     }
 
     public  void addUser(User user){
-        users.add(user);
+        Object o = Objects.isNull(users) || users.isEmpty() ? users = new ArrayList<>(Arrays.asList(user)) : users.add(user);
     }
 
 

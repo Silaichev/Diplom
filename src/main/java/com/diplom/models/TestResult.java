@@ -12,14 +12,15 @@ public class TestResult {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idTR;
 
+    @ManyToOne
+    private User user;
+
     private int score;
     private int numOfQuestions;
     private Date date;
-
     private String test;
 
-    @ManyToOne
-    private User user;
+
 
 
     public TestResult(int score, int numOfQuestions, String test, User user) {
