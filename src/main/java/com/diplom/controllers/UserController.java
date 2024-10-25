@@ -45,12 +45,12 @@ public class UserController {
 
     String username;
     Test nowTest;
-    int numQuestion = 0;
+    int numQuestion;
     List<TestQuestion> testQuestions = new ArrayList<>();
     List<OpenQuestion> openQuestions = new ArrayList<>();
 
-    int questionsCount = 0;
-    int score = 0;
+    int questionsCount;
+    int score;
 
 
     @GetMapping(value = "/image/{imageId}")
@@ -82,7 +82,9 @@ public class UserController {
         Test testById = testRepo.findById(id);
         testQuestions = testById.getTestQuestions();
         openQuestions = testById.getOpenQuestions();
+        questionsCount = 0;
         numQuestion = 0;
+        score = 0;
         nowTest = testById;
         if(!openQuestions.isEmpty()){
             questionsCount+= openQuestions.size()-1;

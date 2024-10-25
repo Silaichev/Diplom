@@ -20,7 +20,7 @@
 <body>
 
 <div class="center">
-    <h2 th:unless="${question.startsWith('/image/')}" th:text="'Вопрос: '+${question}"></h2>
+    <h2 th:unless="${question.startsWith('/image/')}" th:text="'Питання: '+${question}"></h2>
     <img th:if="${question.startsWith('/image/')}" th:src="@{'/user'+${question}}">
     <br/><br/>
     <form method="post">
@@ -32,7 +32,7 @@
                 <input th:unless="${var.startsWith('/image/')}" checked="checked" type="radio" name="var" th:value="${var}" th:text="'   '+ ${var}"><br/>
            </h5>
         </span>
-        <button type="submit" class="btn btn-warning">Отправить</button>
+        <button type="submit" class="btn btn-warning">Відправити</button>
     </form>
 </div>
 
